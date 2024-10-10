@@ -245,9 +245,9 @@ def make_title(dawn: str | None, dusk: str | None, /):
     m = r'^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})(\.\d+)?(([+-]\d{2}:\d{2})|Z)?$'
     api_dfm_dawn, api_dfm_dusk, msg_dfm = "%Y-%m-%dT%H:%M:%S%z", "%Y-%m-%dT%H:%M:%S%z", "%d %B %Y"
     if re.match(m, dawn).group(2):
-        api_dfm = "%Y-%m-%dT%H:%M:%S.%f%z"
+        api_dfm_dawn = "%Y-%m-%dT%H:%M:%S.%f%z"
     if re.match(m, dusk).group(2):
-        api_dfm = "%Y-%m-%dT%H:%M:%S.%f%z"
+        api_dfm_dusk = "%Y-%m-%dT%H:%M:%S.%f%z"
     try:
         start_date = datetime.strptime(dawn, api_dfm_dawn).strftime(msg_dfm)
         end_date = datetime.strptime(dusk, api_dfm_dusk).strftime(msg_dfm)
