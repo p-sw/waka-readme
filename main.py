@@ -242,7 +242,10 @@ def make_title(dawn: str | None, dusk: str | None, /):
     if not dawn or not dusk:
         logger.error("Cannot find start/end date\n")
         sys.exit(1)
+    m = r'^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})(\.\d+)?(([+-]\d{2}:\d{2})|Z)?$'
     api_dfm, msg_dfm = "%Y-%m-%dT%H:%M:%S%z", "%d %B %Y"
+    if re.match(m, dawn).group(2):
+        api_dfm = "%Y-%m-%dT%H:%M:%S.%f%z"
     try:
         start_date = datetime.strptime(dawn, api_dfm).strftime(msg_dfm)
         end_date = datetime.strptime(dusk, api_dfm).strftime(msg_dfm)
